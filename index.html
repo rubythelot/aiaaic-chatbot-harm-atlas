@@ -6,129 +6,253 @@
 <title>Chatbot Harm Atlas — AIAAIC Repository</title>
 <style>
   :root {
-    --bg: #09090b;
-    --panel: #141419;
-    --panel2: #1b1b22;
-    --text: #f4f1ea;
-    --muted: #aaa39a;
-    --line: rgba(244,241,234,.13);
-    --accent: #f4f1ea;
-    --body: #ff6b6b;
-    --privacy: #7dd3fc;
-    --money: #fbbf24;
-    --identity: #d8b4fe;
-    --civic: #86efac;
-    --environment: #34d399;
-    --other: #cbd5e1;
+    --bg: #f6f1e8;
+    --paper: #fffdf7;
+    --panel: #fffaf0;
+    --panel2: #efe7d7;
+    --text: #12100c;
+    --muted: #6f685d;
+    --line: rgba(18, 16, 12, .2);
+    --line-strong: rgba(18, 16, 12, .62);
+    --accent: #12100c;
+    --body: #ff5f55;
+    --privacy: #1a8fb5;
+    --money: #c88a00;
+    --identity: #8f63d5;
+    --civic: #267b45;
+    --environment: #00856b;
+    --other: #687384;
+    --grid: rgba(18, 16, 12, .16);
   }
 
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
     margin: 0;
-    background: radial-gradient(circle at 20% 0%, rgba(125, 211, 252, .12), transparent 28%),
-                radial-gradient(circle at 80% 20%, rgba(216, 180, 254, .10), transparent 30%),
-                var(--bg);
+    background:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+      var(--bg);
+    background-size: 42px 42px;
     color: var(--text);
-    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-family: "Courier New", Courier, ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+    font-size: 14px;
   }
 
-  .page { max-width: 1440px; margin: 0 auto; padding: 34px 34px 56px; }
-  .hero { display: grid; grid-template-columns: 1.25fr .75fr; gap: 22px; align-items: stretch; }
-  .eyebrow { color: var(--muted); text-transform: uppercase; letter-spacing: .13em; font-size: 12px; margin-bottom: 12px; }
-  h1 { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; font-size: clamp(44px, 7vw, 92px); line-height: .92; margin: 0 0 18px; letter-spacing: -.04em; }
-  .lede { font-size: 18px; line-height: 1.55; color: #d7d1c8; max-width: 870px; margin: 0; }
-  .panel { background: rgba(20,20,25,.82); border: 1px solid var(--line); border-radius: 24px; box-shadow: 0 28px 90px rgba(0,0,0,.35); backdrop-filter: blur(10px); }
-  .method { padding: 22px; color: #cfc7bd; font-size: 14px; line-height: 1.55; }
-  .method strong { color: var(--text); }
+  a { color: inherit; }
+  .page { max-width: 1320px; margin: 0 auto; padding: 22px 24px 48px; }
+  .siteNav {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 18px;
+    align-items: start;
+    margin-bottom: 54px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+  }
+  .brand { font-size: 13px; line-height: 1.35; }
+  .navLinks { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px 18px; }
+  .navLinks a, .bracketLink {
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  .navLinks a::before, .bracketLink::before { content: "[\00a0"; }
+  .navLinks a::after, .bracketLink::after { content: "\00a0]"; }
+  .navLinks a:hover, .bracketLink:hover { border-bottom-color: currentColor; }
+
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, .96fr) minmax(320px, .62fr);
+    gap: 30px;
+    align-items: end;
+    margin-bottom: 28px;
+  }
+  .eyebrow {
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .16em;
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+  h1 {
+    font: inherit;
+    font-size: clamp(34px, 6.8vw, 90px);
+    font-weight: 400;
+    line-height: .96;
+    margin: 0 0 22px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
+  }
+  .lede {
+    font-size: clamp(16px, 2vw, 24px);
+    line-height: 1.3;
+    max-width: 920px;
+    margin: 0;
+  }
+  .lede strong { font-weight: 400; text-transform: uppercase; }
+
+  .atlasPlate {
+    min-height: 430px;
+    border: 1px solid var(--line-strong);
+    background:
+      linear-gradient(135deg, rgba(18,16,12,.08) 25%, transparent 25%) 0 0/18px 18px,
+      linear-gradient(225deg, rgba(18,16,12,.08) 25%, transparent 25%) 0 0/18px 18px,
+      radial-gradient(circle at 26% 20%, rgba(255,95,85,.74) 0 8px, transparent 9px),
+      radial-gradient(circle at 72% 28%, rgba(26,143,181,.74) 0 7px, transparent 8px),
+      radial-gradient(circle at 58% 64%, rgba(38,123,69,.74) 0 12px, transparent 13px),
+      radial-gradient(circle at 18% 76%, rgba(143,99,213,.74) 0 10px, transparent 11px),
+      var(--paper);
+    position: relative;
+    overflow: hidden;
+  }
+  .atlasPlate::before {
+    content: "";
+    position: absolute;
+    inset: 12%;
+    border: 1px solid var(--line-strong);
+    transform: rotate(-7deg) skewX(-7deg);
+  }
+  .atlasPlate::after {
+    content: "HARM ATLAS\A AIAAIC REPOSITORY\A CONVERSATIONAL AI";
+    white-space: pre-line;
+    position: absolute;
+    left: 22px;
+    bottom: 20px;
+    max-width: 260px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.45;
+    letter-spacing: .12em;
+  }
+
+  .panel {
+    background: rgba(255, 253, 247, .9);
+    border: 1px solid var(--line-strong);
+    border-radius: 0;
+    box-shadow: 8px 8px 0 rgba(18,16,12,.08);
+  }
+  .method {
+    padding: 18px 20px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.55;
+    margin: 22px 0 0;
+    max-width: 900px;
+  }
+  .method strong { color: var(--text); font-weight: 400; text-transform: uppercase; }
 
   .controls {
     position: sticky; top: 0; z-index: 10;
-    display: grid; grid-template-columns: 1.2fr repeat(4, 1fr); gap: 12px;
-    margin: 24px 0;
-    padding: 14px;
-    background: rgba(9,9,11,.88);
-    border: 1px solid var(--line);
-    border-radius: 22px;
-    backdrop-filter: blur(18px);
+    display: grid; grid-template-columns: 1.2fr repeat(4, 1fr); gap: 1px;
+    margin: 34px 0 18px;
+    padding: 0;
+    background: var(--line-strong);
+    border: 1px solid var(--line-strong);
   }
-  label { display:block; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .11em; margin-bottom: 6px; }
-  select, input[type="search"] { width: 100%; height: 42px; border-radius: 13px; border: 1px solid var(--line); background: #101014; color: var(--text); padding: 0 12px; outline: none; }
-  input[type="range"] { width: 100%; accent-color: #f4f1ea; }
-  .yearReadout { font-size: 13px; color: #ded8ce; margin-top: 2px; }
+  .controls > div { background: rgba(246,241,232,.96); padding: 12px; }
+  label { display:block; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 8px; }
+  select, input[type="search"] {
+    width: 100%; height: 38px; border-radius: 0; border: 1px solid var(--line-strong);
+    background: var(--paper); color: var(--text); padding: 0 10px; outline: none; font: inherit;
+  }
+  select:focus, input[type="search"]:focus { box-shadow: inset 0 0 0 1px var(--text); }
+  input[type="range"] { width: 100%; accent-color: var(--text); }
+  .yearReadout { font-size: 12px; color: var(--muted); margin-top: 3px; }
 
-  .stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 24px; }
-  .stat { padding: 18px; border-radius: 20px; background: var(--panel); border: 1px solid var(--line); min-height: 116px; }
-  .stat .num { font-family: Georgia, 'Times New Roman', serif; font-size: 40px; line-height: 1; }
-  .stat .lab { color: var(--muted); font-size: 12px; margin-top: 10px; line-height: 1.35; }
+  .stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; margin-bottom: 28px; border: 1px solid var(--line-strong); background: var(--line-strong); }
+  .stat { padding: 16px; background: var(--paper); min-height: 108px; }
+  .stat .num { font-size: 38px; line-height: 1; letter-spacing: -.08em; }
+  .stat .lab { color: var(--muted); font-size: 12px; margin-top: 12px; line-height: 1.35; text-transform: uppercase; }
 
-  .grid { display: grid; grid-template-columns: 360px 1fr; gap: 18px; align-items: start; }
+  .grid { display: grid; grid-template-columns: 340px 1fr; gap: 22px; align-items: start; }
   .side { display: grid; gap: 18px; }
   .main { display: grid; gap: 18px; }
-  .card { padding: 20px; }
-  .card h2 { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; font-size: 28px; margin: 0 0 16px; letter-spacing: -.02em; }
-  .card h3 { font-size: 13px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin: 0 0 14px; }
+  .card { padding: 18px; }
+  .card h2 { font: inherit; font-size: 24px; margin: 0 0 18px; letter-spacing: .12em; text-transform: uppercase; }
+  .card h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin: 0 0 14px; font-weight: 400; }
   .note { color: var(--muted); font-size: 13px; line-height: 1.5; }
 
-  .familyList { display: grid; gap: 10px; }
+  .familyList { display: grid; gap: 1px; background: var(--line-strong); border: 1px solid var(--line-strong); }
   .familyBtn {
-    width: 100%; display: grid; grid-template-columns: 12px 1fr auto; gap: 12px; align-items:center;
-    padding: 12px; border-radius: 16px; border: 1px solid var(--line); background: #111116; color: var(--text); text-align:left; cursor:pointer;
+    width: 100%; display: grid; grid-template-columns: 10px 1fr auto; gap: 12px; align-items:center;
+    padding: 12px; border: 0; background: var(--paper); color: var(--text); text-align:left; cursor:pointer; font: inherit;
   }
-  .familyBtn.active { outline: 2px solid rgba(244,241,234,.75); }
-  .dot { width: 12px; height:12px; border-radius: 50%; }
-  .familyName { font-size: 14px; }
-  .familyCount { font-family: Georgia, 'Times New Roman', serif; font-size: 22px; color: #f6efe6; }
+  .familyBtn:hover, .familyBtn.active { background: var(--panel2); }
+  .familyBtn.active { outline: 2px solid var(--text); outline-offset: -2px; }
+  .dot { width: 10px; height:10px; border-radius: 50%; border: 1px solid rgba(18,16,12,.35); }
+  .familyName { font-size: 13px; text-transform: uppercase; }
+  .familyCount { font-size: 20px; letter-spacing: -.06em; }
 
-  .barRow { display: grid; grid-template-columns: minmax(180px, 260px) 1fr 56px; gap: 12px; align-items:center; margin: 10px 0; cursor: pointer; }
-  .barRow:hover .barFill { filter: brightness(1.25); }
-  .barLabel { font-size: 14px; color: #eee8df; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .barTrack { height: 24px; background: #0d0d12; border-radius: 999px; overflow: hidden; border: 1px solid var(--line); }
-  .barFill { height: 100%; border-radius: 999px; transition: width .25s ease; }
-  .barCount { text-align: right; font-variant-numeric: tabular-nums; color: #d7d1c8; }
-  .barRow.selected .barLabel { color: #fff; text-decoration: underline; }
+  .barRow { display: grid; grid-template-columns: minmax(180px, 280px) 1fr 56px; gap: 12px; align-items:center; margin: 9px 0; cursor: pointer; }
+  .barRow:hover .barFill { filter: saturate(1.25) contrast(1.1); }
+  .barLabel { font-size: 13px; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-transform: uppercase; }
+  .barTrack { height: 20px; background: transparent; overflow: hidden; border: 1px solid var(--line-strong); }
+  .barFill { height: 100%; transition: width .25s ease; }
+  .barCount { text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); }
+  .barRow.selected .barLabel { text-decoration: underline; text-underline-offset: 3px; }
 
-  .timelineWrap { width: 100%; overflow: hidden; }
+  .timelineWrap { width: 100%; overflow: hidden; border: 1px solid var(--line); background: rgba(255,255,255,.28); }
   svg { display:block; width:100%; }
   .axis text { fill: var(--muted); font-size: 11px; }
   .axis line { stroke: var(--line); }
-  .tooltip { position: fixed; pointer-events: none; background: #f4f1ea; color: #111; padding: 9px 11px; border-radius: 12px; font-size: 12px; box-shadow: 0 14px 50px rgba(0,0,0,.35); display:none; z-index: 20; max-width: 260px; }
+  .tooltip { position: fixed; pointer-events: none; background: var(--text); color: var(--paper); padding: 8px 10px; border: 1px solid var(--text); font-size: 12px; display:none; z-index: 20; max-width: 260px; }
 
-  .detailGrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 16px; }
-  .mini { background: #101014; border: 1px solid var(--line); border-radius: 16px; padding: 12px; }
-  .mini .k { font-size: 12px; color: var(--muted); }
-  .mini .v { margin-top: 6px; font-size: 20px; font-family: Georgia, 'Times New Roman', serif; }
+  .detailGrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; margin-bottom: 16px; border: 1px solid var(--line-strong); background: var(--line-strong); }
+  .mini { background: var(--paper); padding: 12px; }
+  .mini .k { font-size: 12px; color: var(--muted); text-transform: uppercase; }
+  .mini .v { margin-top: 6px; font-size: 20px; letter-spacing: -.05em; }
   .chips { display:flex; flex-wrap:wrap; gap:8px; margin: 12px 0 0; }
-  .chip { padding: 7px 9px; border-radius: 999px; background: #101014; border: 1px solid var(--line); color: #dfd8ce; font-size:12px; }
+  .chip { padding: 6px 9px; border: 1px solid var(--line-strong); color: var(--text); font-size:12px; background: var(--paper); }
 
-  .incidents { display: grid; gap: 10px; max-height: 460px; overflow: auto; padding-right: 4px; }
-  .incident { padding: 14px; background: #101014; border: 1px solid var(--line); border-radius: 16px; }
+  .incidents { display: grid; gap: 1px; max-height: 460px; overflow: auto; border: 1px solid var(--line-strong); background: var(--line-strong); }
+  .incident { padding: 13px; background: var(--paper); }
   .incident a { color: var(--text); text-decoration: none; }
-  .incident a:hover { text-decoration: underline; }
+  .incident a:hover { text-decoration: underline; text-underline-offset: 3px; }
   .meta { color: var(--muted); font-size: 12px; line-height: 1.45; margin-top: 8px; }
 
-  .footer { margin-top: 28px; color: var(--muted); font-size: 12px; line-height: 1.5; border-top: 1px solid var(--line); padding-top: 18px; }
+  .footer { margin-top: 28px; color: var(--muted); font-size: 12px; line-height: 1.5; border-top: 1px solid var(--line-strong); padding-top: 18px; }
 
   @media (max-width: 1050px) {
     .hero, .grid, .controls { grid-template-columns: 1fr; }
     .stats { grid-template-columns: repeat(2, 1fr); }
+    .atlasPlate { min-height: 280px; }
   }
-  @media (max-width: 640px) { .page { padding: 20px; } .stats { grid-template-columns: 1fr; } }
+  @media (max-width: 640px) {
+    .page { padding: 18px; }
+    .siteNav { grid-template-columns: 1fr; margin-bottom: 36px; }
+    .navLinks { justify-content: flex-start; }
+    .stats, .detailGrid { grid-template-columns: 1fr; }
+    .barRow { grid-template-columns: 1fr; gap: 6px; }
+    h1 { letter-spacing: .11em; }
+  }
 </style>
 </head>
 <body>
 <div class="page">
+  <nav class="siteNav" aria-label="Section navigation">
+    <div class="brand">Chatbot Harm Atlas<br />AIAAIC Repository</div>
+    <div class="navLinks">
+      <a href="#controls">Filters</a>
+      <a href="#domains">Life domains</a>
+      <a href="#atlas">Project directory</a>
+      <a href="https://www.aiaaic.org/aiaaic-repository" rel="noreferrer">Source</a>
+    </div>
+  </nav>
+
   <section class="hero">
     <div>
-      <div class="eyebrow">AIAAIC Repository · Conversational AI harm analysis</div>
-      <h1>Chatbot Harm Atlas</h1>
-      <p class="lede">An interactive view of how chatbot and conversational-AI incidents are coded as harm: bodily, psychological, financial, reputational, civic, privacy-related, and environmental. Each count is a harm mention, not necessarily a unique incident: a single incident may contain multiple harms.</p>
+      <div class="eyebrow">Conversational AI harm analysis</div>
+      <h1>[ Chatbot Harm Atlas ]</h1>
+      <p class="lede"><strong>An interactive directory</strong> of how chatbot and conversational-AI incidents are coded as harm: bodily, psychological, financial, reputational, civic, privacy-related, and environmental.</p>
+      <div class="panel method">
+        <strong>Method.</strong> The default view filters the repository to likely chatbot or conversational-AI cases using system names and incident text: ChatGPT, chatbot, assistant, Gemini, Claude, Copilot, Character.AI, Alexa, Siri, GPT, LLM, companion, and similar terms. Switch to “All AI incidents” to compare against the full repository. Counts are harm mentions, not necessarily unique incidents.
+      </div>
     </div>
-    <div class="panel method">
-      <strong>Method.</strong> The default view filters the repository to likely chatbot or conversational-AI cases using system names and incident text: ChatGPT, chatbot, assistant, Gemini, Claude, Copilot, Character.AI, Alexa, Siri, GPT, LLM, companion, and similar terms. Switch to “All AI incidents” to compare against the full repository.
-    </div>
+    <div class="atlasPlate" aria-hidden="true"></div>
   </section>
 
-  <section class="controls">
+  <section class="controls" id="controls">
     <div>
       <label for="mode">Dataset view</label>
       <select id="mode">
@@ -162,8 +286,8 @@
 
   <section class="stats" id="stats"></section>
 
-  <section class="grid">
-    <aside class="side">
+  <section class="grid" id="atlas">
+    <aside class="side" id="domains">
       <div class="panel card">
         <h3>Life domains</h3>
         <div class="familyList" id="familyList"></div>
@@ -212,7 +336,9 @@ const familyColors = {
   'Environment': 'var(--environment)',
   'Other': 'var(--other)'
 };
-const scopeColors = { Individual: '#ff6b6b', Societal: '#86efac', Environmental: '#34d399' };
+const scopeColors = { Individual: '#ff5f55', Societal: '#267b45', Environmental: '#00856b' };
+const chartLine = 'rgba(18,16,12,.18)';
+const chartText = 'rgba(18,16,12,.58)';
 const familyOrder = ['Body / Psyche','Privacy / Security','Money / Labor','Reputation / Identity','Civic / Epistemic','Environment','Other'];
 
 const el = id => document.getElementById(id);
@@ -347,8 +473,8 @@ function renderTimeline(data) {
   for (let i=0; i<=4; i++) {
     const v = maxTotal * i / 4;
     const y = margin.top + plotH - (v / maxTotal * plotH);
-    html += `<line x1="${margin.left}" y1="${y}" x2="${width-margin.right}" y2="${y}" stroke="rgba(244,241,234,.12)"/>`;
-    html += `<text x="8" y="${y+4}" fill="rgba(244,241,234,.55)" font-size="11">${Math.round(v)}</text>`;
+    html += `<line x1="${margin.left}" y1="${y}" x2="${width-margin.right}" y2="${y}" stroke="${chartLine}"/>`;
+    html += `<text x="8" y="${y+4}" fill="${chartText}" font-size="11">${Math.round(v)}</text>`;
   }
   years.forEach((yr, i) => {
     const x = margin.left + i * gap + (gap-bw)/2;
@@ -361,10 +487,10 @@ function renderTimeline(data) {
       html += `<rect class="timebar" data-year="${yr}" data-scope="${scope}" data-count="${v}" x="${x}" y="${yBase}" width="${bw}" height="${Math.max(0,h)}" rx="2" fill="${scopeColors[scope]}" opacity=".9"></rect>`;
     }
     if (i % Math.ceil(years.length/8) === 0 || i === years.length-1) {
-      html += `<text x="${x+bw/2}" y="${height-12}" text-anchor="middle" fill="rgba(244,241,234,.55)" font-size="11">${yr}</text>`;
+      html += `<text x="${x+bw/2}" y="${height-12}" text-anchor="middle" fill="${chartText}" font-size="11">${yr}</text>`;
     }
   });
-  html += `<text x="${width-18}" y="20" text-anchor="end" fill="rgba(244,241,234,.65)" font-size="12">stacked by harm scope</text>`;
+  html += `<text x="${width-18}" y="20" text-anchor="end" fill="${chartText}" font-size="12">stacked by harm scope</text>`;
   svg.innerHTML = html;
 
   const tip = el('tooltip');
